@@ -14,8 +14,8 @@ namespace Exceptionless.Core.Pipeline {
         public override Task ProcessAsync(EventContext ctx) {
             ctx.Event.Tags?.RemoveWhere(t => String.IsNullOrEmpty(t) || t.Length > 255);
 
-            if (ctx.Event.Message != null && ctx.Event.Message.Length > 2000)
-                ctx.Event.Message = ctx.Event.Message.Truncate(2000);
+            if (ctx.Event.Message != null && ctx.Event.Message.Length > Const.MessageMaxLength)
+                ctx.Event.Message = ctx.Event.Message.Truncate(Const.MessageMaxLength);
             else if (String.IsNullOrEmpty(ctx.Event.Message))
                 ctx.Event.Message = null;
 

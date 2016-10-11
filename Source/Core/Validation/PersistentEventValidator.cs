@@ -31,8 +31,8 @@ namespace Exceptionless.Core.Validation {
             if (String.IsNullOrEmpty(ev.Type) || ev.Type.Length > 100)
                 result.Errors.Add(new ValidationFailure("Type", "Type cannot be longer than 100 characters."));
 
-            if (ev.Message != null && (ev.Message.Length < 1 || ev.Message.Length > 2000))
-                result.Errors.Add(new ValidationFailure("Message", "Message cannot be longer than 2000 characters."));
+            if (ev.Message != null && (ev.Message.Length < 1 || ev.Message.Length > Const.MessageMaxLength))
+                result.Errors.Add(new ValidationFailure("Message", "Message cannot be longer than "+ Const.MessageMaxLength + " characters."));
 
             if (ev.Source != null && (ev.Source.Length < 1 || ev.Source.Length > 2000))
                 result.Errors.Add(new ValidationFailure("Source", "Source cannot be longer than 2000 characters."));
